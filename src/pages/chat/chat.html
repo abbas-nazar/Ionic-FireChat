@@ -17,7 +17,7 @@
 
   <div id="chatmessages">
 
-    <div class="message" *ngFor="let message of messages" >
+    <div *ngFor="let message of messages" [class]="message.specialMessage ? 'messages special' :'messages'" >
       <div [class]="message.username==username ? 'innerMessage messageRight' : 'innerMessage messageLeft'">
         <div class=" username">{{message.username}}</div>
         <div class="message">{{message.message}}</div>
@@ -25,18 +25,16 @@
     </div>
 
   </div>
+</ion-content>
 
   <ion-footer>
-    <ion-toolbar>
+
       <div id="footer">
         <div class="elem1">
       <ion-input type="text" [(ngModel)]="message"></ion-input>
         </div>
-        <div class="elem">
+        <div class="elem2">
         <button ion-button icon-only (click)="sendMessage()"> <ion-icon name="send"></ion-icon></button>
         </div>
       </div>
-    </ion-toolbar>
   </ion-footer>
-
-</ion-content>

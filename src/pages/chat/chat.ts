@@ -27,10 +27,6 @@ export class ChatPage {
     });
   }
 
-  ionViewDidLoad() {
-
-    console.log('ionViewDidLoad ChatPage');
-  }
   sendMessage()
 {
   this.db.list('/chat').push(
@@ -49,5 +45,26 @@ export class ChatPage {
   );
   this.message=' ';
 }
+
+ionViewWillLeave()
+{
+  console.log('user is about to go');
+  this.subscription.unsubscribe();
+  this.db.list('/chat').push(
+    {
+      specialMessage:true,
+      message:`${this.username} has left the room`
+    }
+  )
+}
+ionViewDidLoad()
+{
+  this.db.list('/chat').push(
+    {
+      specialMessage:true,
+      message:`${this.username} has joined the room`
+    }
+  )
+};
 
 }
